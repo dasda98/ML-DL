@@ -1,7 +1,6 @@
-import logs
 import pandas as pd
 
-LOG = logs.LOG()
+from utils.logs.logs import log
 
 
 class Data:
@@ -13,7 +12,7 @@ class Data:
 
     def information(self, dataset: pd.DataFrame):
         head = dataset.head()
-        LOG.log.info(head)
+        log.userLogger.info(head)
 
 
 data = Data('./dataset/housing/housing.csv')

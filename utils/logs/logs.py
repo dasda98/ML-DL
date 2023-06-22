@@ -2,8 +2,11 @@ import logging
 import logging.config
 import yaml
 
-CONFIG_FILE = 'config.yaml'
+from pathlib import Path
 
+
+CONFIG_FILE = Path(__file__).absolute().parent
+CONFIG_FILE = CONFIG_FILE / 'config.yaml'
 
 class LOG:
     def __init__(self, config_file: str):
