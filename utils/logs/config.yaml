@@ -1,0 +1,41 @@
+version: 1
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+handlers:
+  user_console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: simple
+    stream: ext://sys.stdout
+  dev_console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+  user_file_handler:
+    class: logging.FileHandler
+    level: INFO
+    formatter: simple
+    filename: user.log
+    encoding: utf8
+    mode: w
+  dev_file_handler:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: simple
+    filename: dev.log
+    encoding: utf8
+    mode: w
+loggers:
+  devLogger:
+    level: DEBUG
+    handlers: [ dev_console, dev_file_handler ]
+    propagate: no
+  userLogger:
+    level: INFO
+    handlers: [ user_console, user_file_handler ]
+    propagate: no
+root:
+  level: DEBUG
+  handlers: [user_console, user_file_handler]
