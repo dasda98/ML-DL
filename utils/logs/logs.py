@@ -5,8 +5,8 @@ import yaml
 from pathlib import Path
 
 
-CONFIG_FILE = Path(__file__).absolute().parent
-CONFIG_FILE = CONFIG_FILE / 'config.yaml'
+CONFIG_FILE = Path(__file__).absolute().parent / 'config.yaml'
+
 
 class LOG:
     def __init__(self, config_file: str):
@@ -14,7 +14,7 @@ class LOG:
             config = yaml.safe_load(f.read())
             logging.config.dictConfig(config)
 
-        self.devLogger = logging.getLogger('devLoggesr')
+        self.devLogger = logging.getLogger('devLogger')
         self.userLogger = logging.getLogger('userLogger')
 
 
