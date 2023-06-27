@@ -1,5 +1,5 @@
+import io
 import pandas as pd
-
 from utils.logs.logs import log
 
 
@@ -12,4 +12,11 @@ class Data:
 
     def information(self, dataset: pd.DataFrame):
         head = dataset.head()
-        log.devLogger.debug(head)
+
+        log.userLogger.debug(head)
+
+        buf = io.StringIO()
+        dataset.info(buf=buf)
+        info = buf.getvalue()
+
+        log.userLogger.debug(info)

@@ -9,9 +9,12 @@ CONFIG_FILE = Path(__file__).absolute().parent / 'config.yaml'
 
 
 class RemoveLevelFilter(logging.Filter):
+    def __init__(self, levels: list):
+        self.levels = levels
+
     def filter(self, record):
         return self.getLogLevelName(record.levelno) \
-               not in ["DEBUG", "WARNING", "ERROR", "CRITICAL"]
+               not in self.levels
 
     def getLogLevelName(self, levelno):
         switcher = {
@@ -32,7 +35,7 @@ class LOG:
 
         self.devLogger = logging.getLogger('devLogger')
         self.userLogger = logging.getLogger('userLogger')
-        self.userLogger.addFilter(RemoveLevelFilter())
+        self.userLogger.addFilter(RemoveLevelFilter(["DEBUG", "WARNING", "ERROR", "CRITICAL"]))
 
     def check_working(self):
         self.devLogger.debug('message')
@@ -49,4 +52,6 @@ class LOG:
 
 
 log = LOG(CONFIG_FILE)
-log.check_working()
+
+if __name__ == '__main__':
+    log.check_working()
