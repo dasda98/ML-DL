@@ -20,3 +20,4 @@ class Data:
         info = buf.getvalue()
 
         log.userLogger.debug(info)
+        log.userLogger.info(info)
